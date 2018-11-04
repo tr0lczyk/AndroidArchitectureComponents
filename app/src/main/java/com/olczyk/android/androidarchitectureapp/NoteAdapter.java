@@ -56,7 +56,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
             this.note = note;
             textViewTitle.setText(note.getTitle());
             textViewDescription.setText(note.getDescription());
-            textViewPriority.setText(String.valueOf(note.getId()));
+            textViewPriority.setText(String.valueOf(note.getPriority()));
         }
     }
 }

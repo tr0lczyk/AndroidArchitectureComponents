@@ -17,7 +17,10 @@ import org.androidannotations.annotations.ViewById;
 
 
 @EActivity(R.layout.activity_add_note)
-public class AddNoteActivity extends AppCompatActivity {
+public class AddEditNoteActivity extends AppCompatActivity {
+
+    public static final String EXTRA_ID =
+            "com.olczyk.android.androidarchitectureapp.EXTRA_ID";
 
     public static final String EXTRA_TITLE =
             "com.olczyk.android.androidarchitectureapp.EXTRA_TITLE";
@@ -43,7 +46,16 @@ public class AddNoteActivity extends AppCompatActivity {
         numberPickerPriority.setMaxValue(10);
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
-        setTitle("Add note");
+
+        Intent intent = getIntent();
+        if(intent.hasExtra(EXTRA_ID)){
+            setTitle("Edit note");
+            editTextTitle.setText(intent.getExtras().getString(EXTRA_TITLE));
+            editTextDescription.setText(intent.getExtras().getString(EXTRA_DESCRIPTION));
+            numberPickerPriority.setValue(intent.getExtras().getInt(EXTRA_PRIORITY));
+        } else {
+            setTitle("Add note");
+        }
     }
 
     @Override
@@ -80,6 +92,10 @@ public class AddNoteActivity extends AppCompatActivity {
         data.putExtra(EXTRA_TITLE, title);
         data.putExtra(EXTRA_DESCRIPTION, description);
         data.putExtra(EXTRA_PRIORITY, priority);
+        int id = getIntent().getIntExtra(EXTRA_ID,-1);
+        if(id != -1){
+            data.putExtra(EXTRA_ID, id);
+        }
         setResult(RESULT_OK, data);
         finish();
     }

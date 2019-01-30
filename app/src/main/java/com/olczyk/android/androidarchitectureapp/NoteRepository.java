@@ -1,7 +1,7 @@
 package com.olczyk.android.androidarchitectureapp;
 
 import android.app.Application;
-import android.arch.lifecycle.LiveData;
+import androidx.lifecycle.LiveData;
 import android.os.AsyncTask;
 
 import java.util.List;
@@ -25,7 +25,7 @@ public class NoteRepository {
         new UpdateNoteAsyncTask(noteDao).execute(note);
     }
 
-    public void delete(Note note){
+    public void delete(Note note)   {
         new DeleteNoteAsyncTask(noteDao).execute(note);
     }
 
